@@ -5,17 +5,22 @@
  */
 package matrizortogonal;
 
+import Clases.ListaDoble;
+import Formularios.frmAcercaDe;
+
 /**
  *
  * @author darkparadox
  */
 public class frmPricipal extends javax.swing.JFrame {
+    ListaDoble Matriz = new ListaDoble();
 
     /**
      * Creates new form frmPricipal
      */
     public frmPricipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -27,21 +32,138 @@ public class frmPricipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtDato = new javax.swing.JTextField();
+        btnInsertar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMatriz = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mnuArchivo = new javax.swing.JMenu();
+        mnuSalir = new javax.swing.JMenuItem();
+        mnuVer = new javax.swing.JMenu();
+        mnuMostrarLista = new javax.swing.JMenuItem();
+        mnuAcercaDe = new javax.swing.JMenu();
+        mnuAcerca = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Insertar datos");
+
+        jLabel2.setText("Dato:");
+
+        btnInsertar.setText("Insertar");
+        btnInsertar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertarActionPerformed(evt);
+            }
+        });
+
+        tblMatriz.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblMatriz);
+
+        mnuArchivo.setText("Archivo");
+
+        mnuSalir.setText("Salir");
+        mnuSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSalirActionPerformed(evt);
+            }
+        });
+        mnuArchivo.add(mnuSalir);
+
+        jMenuBar1.add(mnuArchivo);
+
+        mnuVer.setText("Ver");
+
+        mnuMostrarLista.setText("Mostrar Lista");
+        mnuMostrarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuMostrarListaActionPerformed(evt);
+            }
+        });
+        mnuVer.add(mnuMostrarLista);
+
+        jMenuBar1.add(mnuVer);
+
+        mnuAcercaDe.setText("Acerca de...");
+
+        mnuAcerca.setText("Acerca de");
+        mnuAcerca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAcercaActionPerformed(evt);
+            }
+        });
+        mnuAcercaDe.add(mnuAcerca);
+
+        jMenuBar1.add(mnuAcercaDe);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 607, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtDato))
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnInsertar, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 427, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtDato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnInsertar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
+        Matriz.agregarAlFinal(Integer.parseInt(txtDato.getText()));
+        txtDato.setText("");
+    }//GEN-LAST:event_btnInsertarActionPerformed
+
+    private void mnuMostrarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMostrarListaActionPerformed
+        Matriz.mostrarListaInicioFin();
+    }//GEN-LAST:event_mnuMostrarListaActionPerformed
+
+    private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mnuSalirActionPerformed
+
+    private void mnuAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcercaActionPerformed
+        frmAcercaDe Acerca = new frmAcercaDe();
+        Acerca.setVisible(true);
+    }//GEN-LAST:event_mnuAcercaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +201,18 @@ public class frmPricipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnInsertar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem mnuAcerca;
+    private javax.swing.JMenu mnuAcercaDe;
+    private javax.swing.JMenu mnuArchivo;
+    private javax.swing.JMenuItem mnuMostrarLista;
+    private javax.swing.JMenuItem mnuSalir;
+    private javax.swing.JMenu mnuVer;
+    private javax.swing.JTable tblMatriz;
+    private javax.swing.JTextField txtDato;
     // End of variables declaration//GEN-END:variables
 }
