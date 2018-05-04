@@ -45,7 +45,7 @@
  * - USAR XMLEncoder para guardar tabla
  * - Usar JAva Web Start para el deploying
  */
-package electric_sheet;
+package Formularios;
 import java.io.*;
 import java.util.*;
 import javax.swing.*;
@@ -53,12 +53,12 @@ import lex.*;
 /**
  * Clase principal que contiene la ventana principal de la aplicacion, contiene metodos para leer y escribir
  * archivos, pasando los streams a otros objetos para que lo analizen.
- * @author  Erik Giron
+ * @author  
  */
-public class MainWindow extends javax.swing.JFrame {
+public class frmPrincipal extends javax.swing.JFrame {
     
-    Workplace wp = new Workplace(); // crea nuevo espacio de trabajo
-    Kreator kr; // Creador de datos
+    frmEspacioTrabajo wp = new frmEspacioTrabajo(); // crea nuevo espacio de trabajo
+    CreadorHojas kr; // Creador de datos
     /*Para el parsing del archivo de entrada*/
     private FileReader fr = null;
     private parser parser = null;
@@ -72,22 +72,22 @@ public class MainWindow extends javax.swing.JFrame {
     
     private int numhojas = 1;
     /** Creates new form MainWindow */
-    public MainWindow() {
+    public frmPrincipal() {
         initComponents(); 
         inicializar();
         
     }
     /**Crea e Inicializa los componentes*/
     protected void inicializar(){
-        kr = new Kreator(wp);
+        kr = new CreadorHojas(wp);
         jPanel1.add(wp,0); // inserta el workspace en el panel principal
         wp.insertarHoja("Hoja 1");
-        wp.insertarHoja("Hoja 2");
-        wp.insertarHoja("Hoja 3");
+        //wp.insertarHoja("Hoja 2");
+        //wp.insertarHoja("Hoja 3");
     }
     /**Genera un nuevo Workplace con hojas vacias, es llamado por el menu nuevo*/
     protected void nuevo(){
-        wp = new Workplace();
+        wp = new frmEspacioTrabajo();
         System.runFinalization();
         inicializar();
     }
@@ -225,8 +225,8 @@ public class MainWindow extends javax.swing.JFrame {
     protected void generarReporte(String fileNameOut){
         LinkedList datos;
         LinkedList listaHojas;
-        Sheet tmpSheet;
-        tda.Dato tmpDato;
+        frmHoja tmpSheet;
+        Clases.Dato tmpDato;
         int numRows = 0;
         int numCols = 0;
         try{
@@ -237,14 +237,16 @@ public class MainWindow extends javax.swing.JFrame {
             //escribir encabezado de HTML a stream
             sw.write("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n");
             sw.write("<html>\n<head>\n<meta content=\"text/html; charset=ISO-8859-1\" http-equiv=\"content-type\">\n");
-            sw.write("<title>ElectricSheet Report</title>\n");
+            sw.write("<title>JExcel</title>\n");
             sw.write("</head>\n<body>\n");
-            sw.write("<big><span style=\"font-weight: bold;\">Hoja generada por ElectricSheet</span></big><br>\n");
-            sw.write("<small>(C) 2006 Erik Giron (c# 200313492)</small><br>\n<br>\n");
+            sw.write("<big><span style=\"font-weight: bold;\">Hoja generada por JExcel</span></big><br>\n");
+            sw.write("<small>Universidad Mariano Gálvez de Guatemala</small><br>\n<br>\n");
+            sw.write("<small>Extensión Morales Izabal</small><br>\n<br>\n");
+            sw.write("<small>(C) Amy C. Leiva - 4890-15-</small><br>\n<br>\n");
             // Iterar sobre cada hoja en listaSheets
             for (int i = 0; i < listaHojas.size();i++){
                 // obtener maximo numero de datos
-                tmpSheet = (Sheet) listaHojas.get(i);
+                tmpSheet = (frmHoja) listaHojas.get(i);
 
                 numRows = tmpSheet.getHoja().getRowCount();
                 numCols = tmpSheet.getHoja().getColumnCount();
@@ -259,7 +261,7 @@ public class MainWindow extends javax.swing.JFrame {
                     datos = tmpSheet.getHoja().getTabla().getSubset(1,1,numCols,numRows);
                     //escribir tabla  con datos generados
                     for (int j = 0; j < datos.size();j++){
-                        tmpDato = (tda.Dato) datos.get(j);                        
+                        tmpDato = (Clases.Dato) datos.get(j);                        
                         sw.write("<tr>\n");
                         sw.write("<td>" + tmpDato.getRow() + "</td>\n");
                         sw.write("<td>" + tmpDato.getCol() + "</td>\n");
@@ -285,22 +287,15 @@ public class MainWindow extends javax.swing.JFrame {
         }
                    
     }
-    // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         jDialogNewSheet = new javax.swing.JDialog();
         jPanelNewSheet = new javax.swing.JPanel();
         jLabelNewSheet = new javax.swing.JLabel();
         jTextFieldNewSheet = new javax.swing.JTextField();
         jButtonCancelNS = new javax.swing.JButton();
         jButtonOKNS = new javax.swing.JButton();
-        jDialogAbout = new javax.swing.JDialog();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenuArchivo = new javax.swing.JMenu();
@@ -363,81 +358,22 @@ public class MainWindow extends javax.swing.JFrame {
         jDialogNewSheet.getContentPane().setLayout(jDialogNewSheetLayout);
         jDialogNewSheetLayout.setHorizontalGroup(
             jDialogNewSheetLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 198, Short.MAX_VALUE)
             .add(jPanelNewSheet, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
         );
         jDialogNewSheetLayout.setVerticalGroup(
             jDialogNewSheetLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 95, Short.MAX_VALUE)
             .add(jPanelNewSheet, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-        );
-        jLabel1.setText("ElectricSheet V. 1.0");
-
-        jLabel2.setText("(c) 2006 Erik Giron");
-
-        jLabel3.setText("Para el Primer proyecto de Estructuras de Datos.");
-
-        jLabel4.setText("Desarrollado por: Erik Vladimir Gir\u00f3n M\u00e1rquez");
-
-        jLabel5.setText("Carnet No 200313492");
-
-        jLabel6.setText("1er Ciclo 2006, Facultad de Ingenieria, USAC Guatemala.");
-
-        jButton1.setMnemonic('C');
-        jButton1.setText("Cerrar");
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout jDialogAboutLayout = new org.jdesktop.layout.GroupLayout(jDialogAbout.getContentPane());
-        jDialogAbout.getContentPane().setLayout(jDialogAboutLayout);
-        jDialogAboutLayout.setHorizontalGroup(
-            jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDialogAboutLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(jLabel2)
-                    .add(jLabel3)
-                    .add(jLabel6)
-                    .add(jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                        .add(jLabel5)
-                        .add(jLabel4)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jDialogAboutLayout.createSequentialGroup()
-                .addContainerGap(289, Short.MAX_VALUE)
-                .add(jButton1)
-                .addContainerGap())
-        );
-        jDialogAboutLayout.setVerticalGroup(
-            jDialogAboutLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jDialogAboutLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(jLabel1)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel2)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel4)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel5)
-                .add(14, 14, 14)
-                .add(jLabel3)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel6)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 47, Short.MAX_VALUE)
-                .add(jButton1)
-                .addContainerGap())
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("ElectricSheet");
+        setTitle("JExcel");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+
         jPanel1.setLayout(new java.awt.BorderLayout());
 
         jMenuArchivo.setMnemonic('a');
         jMenuArchivo.setText("Archivo");
+
         jMenuNuevo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_MASK));
         jMenuNuevo.setMnemonic('n');
         jMenuNuevo.setText("Nuevo");
@@ -451,7 +387,6 @@ public class MainWindow extends javax.swing.JFrame {
                 jMenuNuevoMouseReleased(evt);
             }
         });
-
         jMenuArchivo.add(jMenuNuevo);
 
         jMenuAbrir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_MASK));
@@ -468,7 +403,6 @@ public class MainWindow extends javax.swing.JFrame {
                 jMenuAbrirMouseReleased(evt);
             }
         });
-
         jMenuArchivo.add(jMenuAbrir);
 
         jMenuGuardar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_MASK));
@@ -479,9 +413,7 @@ public class MainWindow extends javax.swing.JFrame {
                 jMenuGuardarMouseReleased(evt);
             }
         });
-
         jMenuArchivo.add(jMenuGuardar);
-
         jMenuArchivo.add(jSeparator1);
 
         jMenuSalir.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_MASK));
@@ -500,13 +432,13 @@ public class MainWindow extends javax.swing.JFrame {
             public void menuKeyTyped(javax.swing.event.MenuKeyEvent evt) {
             }
         });
-
         jMenuArchivo.add(jMenuSalir);
 
         jMenuBar2.add(jMenuArchivo);
 
         jMenuInsertar.setMnemonic('i');
         jMenuInsertar.setText("Insertar");
+
         JMenuInsertarHoja.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         JMenuInsertarHoja.setMnemonic('h');
         JMenuInsertarHoja.setText("Hoja...");
@@ -520,20 +452,19 @@ public class MainWindow extends javax.swing.JFrame {
                 JMenuInsertarHojaMouseReleased(evt);
             }
         });
-
         jMenuInsertar.add(JMenuInsertarHoja);
 
         jMenuBar2.add(jMenuInsertar);
 
         jMenuAyuda.setMnemonic('y');
         jMenuAyuda.setText("Ayuda");
+
         jMenuAbout.setText("Acerca de...");
         jMenuAbout.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 jMenuAboutMouseReleased(evt);
             }
         });
-
         jMenuAyuda.add(jMenuAbout);
 
         jMenuBar2.add(jMenuAyuda);
@@ -548,8 +479,9 @@ public class MainWindow extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
         );
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -570,13 +502,9 @@ public class MainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuGuardarMouseReleased
 
     private void jMenuAboutMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuAboutMouseReleased
-        jDialogAbout.setBounds(200,200,400,275);
-        jDialogAbout.setVisible(true);
+        frmAcercaDe Acerca = new frmAcercaDe();
+        Acerca.setVisible(true);
     }//GEN-LAST:event_jMenuAboutMouseReleased
-
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-     jDialogAbout.setVisible(false);
-    }//GEN-LAST:event_jButton1MouseClicked
 
     private void jMenuNuevoMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuNuevoMouseReleased
         nuevo();
@@ -619,24 +547,16 @@ public class MainWindow extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true);
+                new frmPrincipal().setVisible(true);
             }
         });
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem JMenuInsertarHoja;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonCancelNS;
     private javax.swing.JButton jButtonOKNS;
-    private javax.swing.JDialog jDialogAbout;
     private javax.swing.JDialog jDialogNewSheet;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelNewSheet;
     private javax.swing.JMenuItem jMenuAbout;
     private javax.swing.JMenuItem jMenuAbrir;

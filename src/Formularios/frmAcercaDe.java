@@ -7,7 +7,7 @@ package Formularios;
 
 /**
  *
- * @author darkparadox
+ * @author 
  */
 public class frmAcercaDe extends javax.swing.JFrame {
 

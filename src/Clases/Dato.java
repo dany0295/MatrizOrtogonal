@@ -6,10 +6,10 @@
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
-package tda;
+package Clases;
+import Formularios.frmHoja;
 import lex.*;
 import java.io.*;
-import electric_sheet.*;
 /**
  * Clase que almacena los datos guardados en las celdas de la hoja 
  * electronica.
@@ -104,7 +104,7 @@ public class Dato {
       String idHoja;
       Dato tmpDato;
       boolean huboError = false;
-      Sheet tmpSheet;
+      frmHoja tmpSheet;
       
       StringReader st = new StringReader(expr);
       /* create a parsing object */

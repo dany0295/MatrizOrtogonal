@@ -7,8 +7,9 @@
  * and open the template in the editor.
  */
 
-package tda;
+package Clases;
 
+import Clases.Dato;
 import java.util.*;
 
 /**

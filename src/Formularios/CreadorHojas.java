@@ -1,34 +1,27 @@
 /*
- * Kreator.java
- *
- * Creada el 19 de marzo de 2006, 07:02 PM
- *
  * To change this template, choose Tools | Template Manager
  * and open the template in the editor.
  */
 
-package electric_sheet;
-import tda.*;
+package Formularios;
+import Clases.Dato;
 
 
 /**
  * Clase generadora de hojas que se van leyendo en el archivo de entrada
- * @author Erik Giron (200313492)
+ * @author 
  *
  */
-public class Kreator {
-    private Workplace wp = null;
-//    private int row, col;
-//    private String idHoja;
-//    private String expr;
-    /***/
-    public Kreator() {
+public class CreadorHojas {
+    private frmEspacioTrabajo wp = null;
+    
+    public CreadorHojas() {
     }
 
-    public void setWorkplace(Workplace w){
+    public void setWorkplace(frmEspacioTrabajo w){
         wp = w;
     }
-    public Workplace getWorkplace(Workplace w){
+    public frmEspacioTrabajo getWorkplace(frmEspacioTrabajo w){
         return wp;
     }
     /**Inserta un dato, si no existe la hoja, la crea,
@@ -61,7 +54,7 @@ public class Kreator {
     /** Crea una nueva instancia de Kreator */
     
     
-    Kreator(Workplace w){
+    CreadorHojas(frmEspacioTrabajo w){
         wp = w;
     }
 }

@@ -5,7 +5,6 @@
  */
 package matrizortogonal;
 
-import Clases.ListaDoble;
 import Formularios.frmAcercaDe;
 
 /**
@@ -13,7 +12,6 @@ import Formularios.frmAcercaDe;
  * @author darkparadox
  */
 public class frmPricipal extends javax.swing.JFrame {
-    ListaDoble Matriz = new ListaDoble();
 
     /**
      * Creates new form frmPricipal
@@ -148,12 +146,11 @@ public class frmPricipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnInsertarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarActionPerformed
-        Matriz.agregarAlFinal(Integer.parseInt(txtDato.getText()));
-        txtDato.setText("");
+
     }//GEN-LAST:event_btnInsertarActionPerformed
 
     private void mnuMostrarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuMostrarListaActionPerformed
-        Matriz.mostrarListaInicioFin();
+
     }//GEN-LAST:event_mnuMostrarListaActionPerformed
 
     private void mnuSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSalirActionPerformed

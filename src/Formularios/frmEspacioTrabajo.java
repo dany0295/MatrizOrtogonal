@@ -1,37 +1,25 @@
 /*
- * Workplace.java
- *
- * Created on 6 de marzo de 2006, 07:43 PM
- * @TODO:
- * Hecho Asignar modelo de datos para la tabla
- * - Conectar el modelo de datos a la hoja creada
- * - Conectar lista de hojas con Tablist
- * - Eventos para almacenar datos desde tabla visual a tabla abstracta
- * - Eventos para que procese los datos de la tabla
  * 
  */
 
-package electric_sheet;
+package Formularios;
 
 import java.util.*;
 import javax.swing.*;
-import tda.*;
 /**
- * Espacio de trabajo que anida el
- * listado de hojas
- * @author  Erik Giron
+ * @author  
  */
-public class Workplace extends javax.swing.JPanel {
-    private LinkedList<Sheet> listaHojas;
-    private Sheet tmpHoja;
+public class frmEspacioTrabajo extends javax.swing.JPanel {
+    private LinkedList<frmHoja> listaHojas;
+    private frmHoja tmpHoja;
     /** Creates new form Workplace */
-    public Workplace() {
+    public frmEspacioTrabajo() {
         initComponents();
         InicializarListaHojas();
     }
     public void InicializarListaHojas(){
         //Sheet hoja = new Sheet("Hoja 1");
-        listaHojas = new LinkedList<Sheet>(); // crea lista de hojas
+        listaHojas = new LinkedList<frmHoja>(); // crea lista de hojas
 //        ListadoHojas.insertTab("Hoja1",null,new Sheet("hoja1",this),"1",0);
         
 //        listaHojas.add(hoja); //agrega una nueva hoja
@@ -49,20 +37,20 @@ public class Workplace extends javax.swing.JPanel {
             numElem = listaHojas.size();
             //tmpHoja =(Sheet) listaHojas.get(i);
             while(i <numElem && !encontrado){
-                tmpHoja =(Sheet) listaHojas.get(i);
+                tmpHoja =(frmHoja) listaHojas.get(i);
                 if (tmpHoja.getId().equals(name))
                     encontrado = true;
                 i++;
             }
             if (!encontrado){
-                Sheet hoja = new Sheet(name,this);
+                frmHoja hoja = new frmHoja(name,this);
                 ListadoHojas.addTab(hoja.getId(),hoja); //inserta hoja en los tab
                 listaHojas.addLast(hoja); //agrega una nueva hoja
                 return true;
             }
         }
         else{
-            Sheet hoja = new Sheet(name,this);
+            frmHoja hoja = new frmHoja(name,this);
             ListadoHojas.addTab(hoja.getId(),hoja); //inserta hoja en los tab
             listaHojas.addLast(hoja); //agrega una nueva hoja
             return true;            
@@ -73,16 +61,16 @@ public class Workplace extends javax.swing.JPanel {
     /**Elimina una hoja en la lista de hojas
      @return True si se logro eliminar el elemento*/
     public boolean eliminarHoja(String name){
-        Sheet tmpLast;
+        frmHoja tmpLast;
         boolean encontrado = false;
         int i = 0;
 
         if(!(listaHojas.isEmpty())){
-            tmpLast = (Sheet) listaHojas.getLast();
-            tmpHoja =(Sheet) listaHojas.get(i);
+            tmpLast = (frmHoja) listaHojas.getLast();
+            tmpHoja =(frmHoja) listaHojas.get(i);
 
             while(tmpLast.equals(tmpHoja) && !encontrado){
-                tmpHoja =(Sheet) listaHojas.get(i);
+                tmpHoja =(frmHoja) listaHojas.get(i);
                 if (tmpHoja.getId().equals(name)){ 
                     encontrado = true;
                     listaHojas.remove(i);
@@ -94,7 +82,7 @@ public class Workplace extends javax.swing.JPanel {
     }
     /**Elimina la pestana seleccionada actualmente*/
     public void eliminarTabActual(){
-        Sheet tablaActual = (Sheet) ListadoHojas.getSelectedComponent();
+        frmHoja tablaActual = (frmHoja) ListadoHojas.getSelectedComponent();
         if (tablaActual != null){
             eliminarHoja(tablaActual.getId());
             ListadoHojas.removeTabAt(ListadoHojas.getSelectedIndex());
@@ -104,7 +92,7 @@ public class Workplace extends javax.swing.JPanel {
     /**Cambia nombre a la hoja actual*/
     public void renameTabActual(String newName){
         String oldName = new String();
-        Sheet tablaActual = (Sheet) ListadoHojas.getSelectedComponent();
+        frmHoja tablaActual = (frmHoja) ListadoHojas.getSelectedComponent();
         if (tablaActual != null){
             tablaActual.setId(new String(newName));
             ListadoHojas.setTitleAt(ListadoHojas.getSelectedIndex(),new String(newName));
@@ -112,21 +100,21 @@ public class Workplace extends javax.swing.JPanel {
         
     }
     /** retorna una referencia a una hoja electronica con nombre idHoja*/
-    public Sheet getSheet(String idHoja){
+    public frmHoja getSheet(String idHoja){
         int index = 0;
-        Sheet tmpSheet = (Sheet) listaHojas.get(index);
+        frmHoja tmpSheet = (frmHoja) listaHojas.get(index);
         while(tmpSheet != null){
             //tmpSheet = listaHojas.get(index);
             if (tmpSheet != null && tmpSheet.getId().equalsIgnoreCase(idHoja))
                 return tmpSheet;
             index++;
-            tmpSheet = (Sheet) listaHojas.get(index);
+            tmpSheet = (frmHoja) listaHojas.get(index);
         }
         return null;
     }
     /**Obtiene referencia a la hoja electronica actual*/
-    public Sheet getActualSheet(){
-        return (Sheet) this.ListadoHojas.getSelectedComponent();
+    public frmHoja getActualSheet(){
+        return (frmHoja) this.ListadoHojas.getSelectedComponent();
     }
     /**Devuelve una lista enlazada con referencias a las hojas electronicas*/
     public LinkedList getListaHojas() {
@@ -138,8 +126,9 @@ public class Workplace extends javax.swing.JPanel {
      * WARNING: Do NOT modify this code. The content of this method is
      * always regenerated by the Form Editor.
      */
-    // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+
         jPopupMenu1 = new javax.swing.JPopupMenu();
         EliminarHoja = new javax.swing.JMenuItem();
         CambiarNombre = new javax.swing.JMenuItem();
@@ -153,13 +142,13 @@ public class Workplace extends javax.swing.JPanel {
         jPopupMenu1.setInvoker(ListadoHojas);
         jPopupMenu1.setMaximumSize(new java.awt.Dimension(400, 200));
         jPopupMenu1.setPreferredSize(new java.awt.Dimension(200, 50));
+
         EliminarHoja.setText("Eliminar hoja actual");
         EliminarHoja.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 EliminarHojaMouseReleased(evt);
             }
         });
-
         jPopupMenu1.add(EliminarHoja);
 
         CambiarNombre.setText("Renombrar Hoja Actual...");
@@ -168,15 +157,13 @@ public class Workplace extends javax.swing.JPanel {
                 CambiarNombreMouseReleased(evt);
             }
         });
-
         jPopupMenu1.add(CambiarNombre);
-
-        jDialogRename.getContentPane().setLayout(null);
 
         jDialogRename.setTitle("Asignar nuevo nombre...");
         jDialogRename.setAlwaysOnTop(true);
         jDialogRename.setResizable(false);
-        jDialogRename.getAccessibleContext().setAccessibleParent(null);
+        jDialogRename.getContentPane().setLayout(null);
+
         jButtonCancelDR.setText("Cancelar");
         jButtonCancelDR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +175,6 @@ public class Workplace extends javax.swing.JPanel {
                 jButtonCancelDRMouseReleased(evt);
             }
         });
-
         jDialogRename.getContentPane().add(jButtonCancelDR);
         jButtonCancelDR.setBounds(180, 70, 110, 30);
 
@@ -198,10 +184,8 @@ public class Workplace extends javax.swing.JPanel {
                 jButtonOKDRMouseReleased(evt);
             }
         });
-
         jDialogRename.getContentPane().add(jButtonOKDR);
         jButtonOKDR.setBounds(30, 70, 120, 30);
-
         jDialogRename.getContentPane().add(jTextFieldDR);
         jTextFieldDR.setBounds(170, 30, 130, 20);
 
@@ -209,8 +193,8 @@ public class Workplace extends javax.swing.JPanel {
         jDialogRename.getContentPane().add(jLabelDR);
         jLabelDR.setBounds(10, 20, 150, 40);
 
-        ListadoHojas.setComponentPopupMenu(jPopupMenu1);
         ListadoHojas.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+        ListadoHojas.setComponentPopupMenu(jPopupMenu1);
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
@@ -255,17 +239,12 @@ public class Workplace extends javax.swing.JPanel {
     private javax.swing.JMenuItem CambiarNombre;
     private javax.swing.JMenuItem EliminarHoja;
     private javax.swing.JTabbedPane ListadoHojas;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButtonCancelDR;
     private javax.swing.JButton jButtonOKDR;
     private javax.swing.JDialog jDialogRename;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelDR;
     private javax.swing.JPopupMenu jPopupMenu1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextFieldDR;
-    private javax.swing.JToolBar jToolBar1;
     // End of variables declaration//GEN-END:variables
     
 }

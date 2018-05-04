@@ -7,10 +7,11 @@
  * and open the template in the editor.
  */
 
-package tda;
+package Clases;
 
+import Formularios.frmEspacioTrabajo;
+import Clases.Dato;
 import javax.swing.table.*;
-import electric_sheet.*;
 /**
  * Modelo de tabla que implementa una matriz ortogonal como DDE para
  * representar las series de datos
@@ -25,7 +26,7 @@ public class Hoja extends AbstractTableModel {
     private String id = new String();
     private Matriz tabla = new Matriz();
     
-    private tda.Dato datoAInsertar = new Dato();
+    private Clases.Dato datoAInsertar = new Dato();
     public void setId(String sId){
         this.id = sId;
     }
@@ -98,7 +99,7 @@ public class Hoja extends AbstractTableModel {
         fireTableCellUpdated(row, col);
     }
     /**Asigna referencia a la matriz del workplace donde se encuentra contenida*/
-    public void setWorkplace(Workplace wp){
+    public void setWorkplace(frmEspacioTrabajo wp){
         tabla.setWorkplace(wp);
     }
 }

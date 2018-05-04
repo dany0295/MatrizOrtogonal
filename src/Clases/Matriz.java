@@ -7,10 +7,11 @@
  * and open the template in the editor.
  */
 
-package tda;
+package Clases;
 
+import Formularios.frmEspacioTrabajo;
+import Clases.Dato;
 import java.util.*;
-import electric_sheet.*;
 /**
  * Clase de la estructura de datos(matriz Ortogonal) a utilizar
  * @author Erik Giron (200313492)
@@ -107,14 +108,14 @@ public class Matriz {
     /**Puntero a nodo actual*/
     private Nodo actual = null;
     /**Workplace al que pertenece la matriz*/
-    private Workplace wp;
+    private frmEspacioTrabajo wp;
     
     /**Asigna workplace a la matriz*/
-    public void setWorkplace(Workplace w){
+    public void setWorkplace(frmEspacioTrabajo w){
         wp = w;
     }
     /**Retorna referencia a workplace donde se encuentra la matriz*/
-    public Workplace getWorkplace(){
+    public frmEspacioTrabajo getWorkplace(){
         return wp;
     }
     /** Crea una nueva instancia de Matriz */

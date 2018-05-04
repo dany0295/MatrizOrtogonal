@@ -6,9 +6,9 @@
 
 package lex;
 
+import Formularios.CreadorHojas;
 import java_cup.runtime.*;
 import java.util.*;
-import electric_sheet.*;
 
 /** CUP v0.10k TUM Edition 20050516 generated parser.
   * @version Wed Mar 22 16:24:07 CST 2006
@@ -168,18 +168,18 @@ public class parser extends java_cup.runtime.lr_parser {
                 private static int fily1; //columna en y
                 private static String idHoja; //Hoja en la que se evaluara
                 private static String expr; //Hoja en la que se evaluara
-                private Kreator creador;
+                private CreadorHojas creador;
                 /*public Lexer scanner;*/
 		private static String retval;
 		public void setRetval(String s){
 			retval = s;
 		}
                 /**Asigna la clase creadora de datos*/
-                public void setCreador(Kreator kr){
+                public void setCreador(CreadorHojas kr){
                     creador = kr;
                 }
                 /**Devuelve la clase creadora de datos*/
-                public Kreator getCreador(){
+                public CreadorHojas getCreador(){
                     return creador;
                 }
 		/**Retorna expresion aritmetica evaluada*/
