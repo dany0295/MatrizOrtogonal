@@ -1,0 +1,121 @@
+//import sym.*;               // definition of terminals returned by scanner
+package lex;
+
+import java_cup.runtime.*;  // definition of scanner/parser interface
+
+/* semantic value of token returned by scanner */
+
+//<YYINITIAL> {CADENA} {
+//  return new Symbol(sym.CADENA, new String(yytext())); 
+//}
+
+%%
+%notunix
+%class Lexer
+%implements java_cup.runtime.Scanner
+%function next_token
+%type java_cup.runtime.Symbol
+%state EXPR
+
+
+%eofval{
+  return new Symbol(sym.EOF, null);
+%eofval}
+%{
+  public String sourceFilename;
+  
+  public void init(){};
+%}
+%line
+%char
+%public
+
+
+
+ALPHA=[A-Za-z_áéíóúÁÉÍÓÚ]
+SIGNOS=[\"\(\)\{\}\[\]\.\,\:\;\<\>\?\~\|\-\+\*\/\=]
+DIGITO=[0-9]
+ALPHA_NUMERIC={ALPHA}|{DIGITO}
+//ID={ALPHA}({ALPHA_NUMERIC}|" "|"\t"|{SIGNOS})*({ALPHA_NUMERIC}|{SIGNOS})
+ID=[A-Za-z_]({ALPHA_NUMERIC}|" ")*({ALPHA_NUMERIC})
+ENTEROPOS=({DIGITO})+
+WHITE_SPACE=[\ \n\r\t\f]
+//CADENA={ALPHA_NUMERIC}({ALPHA_NUMERIC}|\ )*({ALPHA_NUMERIC})
+//CADENA={ALPHA_NUMERIC}({ALPHA_NUMERIC}|" "|"\t"|{SIGNOS})*({ALPHA_NUMERIC}|{SIGNOS})
+
+%%
+
+<YYINITIAL> {ENTEROPOS} {
+  return new Symbol(sym.ENTEROPOS, new Integer(yytext())); 
+}
+<YYINITIAL> {ENTEROPOS}("."{ENTEROPOS})? {
+  return new Symbol(sym.FLOTANTE, new Double(yytext())); 
+}
+
+<YYINITIAL> {ID} {
+  return new Symbol(sym.ID, new String(yytext())); 
+}  
+
+
+<YYINITIAL> "," {
+  return new Symbol(sym.COMA); 
+}
+
+
+<YYINITIAL> "(" {
+  return new Symbol(sym.APARENT); 
+}
+
+<YYINITIAL> ")" {
+  return new Symbol(sym.CPARENT); 
+}
+
+<YYINITIAL> ";" {
+  return new Symbol(sym.PUNTOYCOMA); 
+}
+
+<YYINITIAL> "=" {
+  return new Symbol(sym.IGUAL); 
+}
+
+<YYINITIAL> "Suma" {
+  return new Symbol(sym.KW_SUMA); 
+}
+
+<YYINITIAL> "Mult" {
+  return new Symbol(sym.KW_MULT)); 
+}
+
+<YYINITIAL> "Prom" {
+  return new Symbol(sym.KW_PROM); 
+}
+
+<YYINITIAL> "Dato" {
+  return new Symbol(sym.KW_DATO); 
+}
+
+<YYINITIAL> "+" {
+  return new Symbol(sym.MAS); 
+}
+<YYINITIAL> "-" {
+  return new Symbol(sym.MENOS); 
+}
+<YYINITIAL> "*" {
+  return new Symbol(sym.POR); 
+}
+
+<YYINITIAL> "/" {
+  return new Symbol(sym.DIV); 
+}
+
+
+<YYINITIAL> ({WHITE_SPACE})+ { }
+
+
+<YYINITIAL> . {
+  return new Symbol(sym.error, null);
+}
+
+<YYINITIAL> "'"({ALPHA_NUMERIC}|{SIGNOS}|" "|({ID}))+"'" {
+	return new Symbol(sym.EXPR, new String(yytext().substring(1,yytext().length()-1)));   
+}  
