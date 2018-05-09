@@ -2,7 +2,8 @@ package lex;
 
 import java_cup.runtime.*;
 import java.util.*;
-import electric_sheet.*;
+import Clases.*;
+import Formularios.*;
 /* Preliminaries to set up and use the scanner.  
 init with {: scanner.init();    :}
 scan with {: return scanner.next_token();:};
@@ -18,18 +19,18 @@ parser code {:
                 private static int fily1; //columna en y
                 private static String idHoja; //Hoja en la que se evaluara
                 private static String expr; //Hoja en la que se evaluara
-                private Kreator creador;
+                private CradorHojas creador;
                 /*public Lexer scanner;*/
 		private static String retval;
 		public void setRetval(String s){
 			retval = s;
 		}
                 /**Asigna la clase creadora de datos*/
-                public void setCreador(Kreator kr){
+                public void setCreador(CreadorHojas kr){
                     creador = kr;
                 }
                 /**Devuelve la clase creadora de datos*/
-                public Kreator getCreador(){
+                public CreadorHojas getCreador(){
                     return creador;
                 }
 		/**Retorna expresion aritmetica evaluada*/

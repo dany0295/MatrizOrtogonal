@@ -20,8 +20,11 @@ import javax.swing.table.*;
  */
 public class Hoja extends AbstractTableModel {
     
-    private int max_col = (int) Math.pow(2,14) ; //almacena la columna maxima que se ha alcanzado
-    private int max_row = (int) Math.pow(2,18) ;
+    //private int max_col = (int) Math.pow(2,14) ; //almacena la columna maxima que se ha alcanzado
+    //private int max_row = (int) Math.pow(2,18) ;
+    
+    private int max_col = (int) 21 ; //almacena la columna maxima que se ha alcanzado
+    private int max_row = (int) 21 ;
     
     private String id = new String();
     private Matriz tabla = new Matriz();
